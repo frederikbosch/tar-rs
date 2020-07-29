@@ -173,6 +173,7 @@ impl<'a> Archive<dyn Read + 'a> {
         let dst = &dst.canonicalize().unwrap_or(dst.to_path_buf());
 
         for entry in self._entries()? {
+            println!("{:?}", &entry);
             let mut file = entry.map_err(|e| TarError::new("failed to iterate over archive", e))?;
             file.unpack_in(dst)?;
         }
